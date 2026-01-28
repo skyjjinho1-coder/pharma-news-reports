@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제약 뉴스 리포트 - 2026-01-28</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .stats-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-card.blue { background: #3b82f6; }
+        .stat-card.purple { background: #8b5cf6; }
+        .stat-card.green { background: #10b981; }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .category-major {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 20px 0 12px 0;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .category-major:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .category-major.blue { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
+        .category-major.purple { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        .category-major.green { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+
+        .category-major .toggle-icon {
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+
+        .category-major.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .category-major-content {
+            display: block;
+        }
+
+        .category-major-content.hidden {
+            display: none;
+        }
+
+        .category-minor {
+            background: #f8f9fa;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            border-left: 4px solid #667eea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .category-minor:hover {
+            background: #eef2ff;
+        }
+
+        .category-minor .toggle-icon {
+            font-size: 10px;
+            color: #6b7280;
+            transition: transform 0.3s;
+        }
+
+        .category-minor.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .category-minor-content {
+            display: block;
+        }
+
+        .category-minor-content.hidden {
+            display: none;
+        }
+
+        .article-group-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+
+        .article-group-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+        }
+
+        .article-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .article-title a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .article-title a:hover {
+            text-decoration: underline;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-dept {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-source {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .badge-similar {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-importance {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .article-description {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-top: 12px;
+        }
+
+        .similar-articles {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 2px dashed #e5e7eb;
+        }
+
+        .similar-article-item {
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .similar-article-item a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .similar-article-item a:hover {
+            text-decoration: underline;
+        }
+
+        .similar-article-item .meta {
+            color: #6b7280;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .insights-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 20px 0 12px 0;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .insights-section .toggle-icon {
+            transition: transform 0.3s;
+        }
+
+        .insights-section.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .insights-content {
+            background: #f8f9fa;
+            border-radius: 0 0 12px 12px;
+            padding: 20px;
+            margin-top: -8px;
+        }
+
+        .insights-content.hidden {
+            display: none;
+        }
+
+        .executive-summary {
+            background: #f0f9ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .executive-summary h4 {
+            color: #1e40af;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .executive-summary p {
+            color: #1f2937;
+            line-height: 1.7;
+        }
+
+        .issue-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .issue-card h4 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .issue-card .issue-meta {
+            margin-bottom: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .issue-card .issue-content {
+            margin: 12px 0;
+        }
+
+        .issue-card .issue-content strong {
+            color: #1f2937;
+        }
+
+        .issue-card .issue-content p {
+            margin-top: 6px;
+            line-height: 1.6;
+            color: #374151;
+        }
+
+        .related-articles {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 2px dashed #667eea;
+        }
+
+        .related-article-item {
+            padding: 10px 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .related-article-item a {
+            color: #111827;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .related-article-item a:hover {
+            color: #667eea;
+        }
+
+        .related-article-item .meta {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .dept-summary {
+            background: #ecfdf5;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 4px solid #10b981;
+        }
+
+        .dept-summary h4 {
+            color: #065f46;
+            margin-bottom: 16px;
+        }
+
+        .dept-summary-item {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .dept-summary-item strong {
+            color: #1f2937;
+        }
+
+        .filter-bar {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .filter-bar h3 {
+            color: #667eea;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .filter-controls input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .filter-controls input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .filter-controls select {
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .filter-controls button {
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-controls button:hover {
+            background: #5a67d8;
+        }
+
+        .filter-result {
+            background: #eef2ff;
+            color: #4338ca;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+
+        .footer {
+            padding: 20px;
+            background: #f9fafb;
+            text-align: center;
+            color: #6b7280;
+            font-size: 12px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            .stats-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stat-number {
+                font-size: 28px;
+            }
+            .content {
+                padding: 20px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .filter-bar {
+                display: none;
+            }
+            .category-major-content,
+            .category-minor-content,
+            .insights-content {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📰 제약 뉴스 리포트</h1>
+            <p>2026년 01월 28일 11:09 기준 (KST) | v11.3 최종판</p>
+        </div>
+
+        <div class="content">
+            <div class="stats-summary">
+                <div class="stat-card">
+                    <div class="stat-number">36</div>
+                    <div class="stat-label">총 기사</div>
+                </div>
+                <div class="stat-card blue">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">우리회사</div>
+                </div>
+                <div class="stat-card purple">
+                    <div class="stat-number">22</div>
+                    <div class="stat-label">경쟁사</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-number">14</div>
+                    <div class="stat-label">기타</div>
+                </div>
+            </div>
+
+            <div class="filter-bar">
+                <h3>🔍 검색 및 필터</h3>
+                <div class="filter-controls">
+                    <input type="text" id="searchInput" placeholder="기사 제목 검색..." onkeyup="filterArticles()">
+                    <select id="categoryFilter" onchange="filterArticles()">
+                        <option value="">모든 카테고리</option>
+                        <option value="🏢 우리회사 소식">🏢 우리회사 소식</option>
+                        <option value="경쟁사 소식">경쟁사 소식</option>
+                        <option value="기타 소식">기타 소식</option>
+                    </select>
+                    <button onclick="resetFilters()">🔄 초기화</button>
+                </div>
+                <div id="filterResult" class="filter-result"></div>
+            </div>
+
+            <div class="insights-section" onclick="toggleSection(this)">
+                <span>🧠 AI 인사이트 (5개 이슈)</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="insights-content">
+
+                <div class="executive-summary">
+                    <h4>📋 Executive Summary</h4>
+                    <p>최근 제약/바이오 업계는 경쟁 심화, 해외 시장 확장, 디지털 헬스케어 부상, 원자재 가격 변동 등 다양한 변화에 직면하고 있다. 경쟁사들은 군부대 PX 채널 공략, 해외 시장 진출, 사업개발 및 R&D 역량 강화 등을 통해 성장 동력을 확보하고 있다. 비씨월드제약은 이러한 변화에 발맞춰 신규 사업 기회 모색, 우수 인재 확보, 디지털 헬스케어 기술 도입 등을 통해 경쟁력을 강화해야 한다. 또한, 원자재 가격 변동에 따른 경영 리스크를 줄이기 위한 대비책 마련도 필요하다.</p>
+                </div>
+
+                <div class="issue-card">
+                    <h4>1. 경쟁사, 군부대 PX 채널 적극 공략</h4>
+                    <div class="issue-meta">
+                        <span class="badge badge-importance">중요도: ⭐⭐⭐⭐</span>
+                        <span class="badge badge-dept">영업마케팅본부</span><span class="badge badge-dept">사업개발본부</span>
+                    </div>
+                    <div class="issue-content">
+                        <strong>📌 핵심:</strong>
+                        <p>동아제약, 코오롱제약 등 경쟁사들이 군부대 PX에 화장품, 건강기능식품 등을 입점시키며 새로운 유통 채널을 확보하고 있다. 이는 군 장병들을 대상으로 브랜드 인지도를 높이고 매출을 확대하려는 전략으로 풀이된다.</p>
+                    </div>
+                    <div class="issue-content">
+                        <strong>🎯 시사점:</strong>
+                        <p>비씨월드제약도 군부대 PX 채널 진출을 고려하여 신규 성장 동력을 확보할 수 있다. 특히 ODT 제형의 강점을 활용한 제품이나 건강기능식품, 화장품 등 신사업 분야 제품으로 접근하는 것을 검토할 필요가 있다. 다만, 군부대 PX 채널의 특성을 고려한 제품 개발 및 마케팅 전략 수립이 필요하다.</p>
+                    </div>
+
+                    <div class="related-articles">
+                        <strong style="color:#667eea;">📎 관련 기사 (2개)</strong>
+
+                        <div class="related-article-item">
+                            <a href="https://www.pharmnews.com/news/articleView.html?idxno=301141" target="_blank">동아제약 파티온, 군부대마트(PX) 유통 채널 확대</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                        <div class="related-article-item">
+                            <a href="https://www.pharmnews.com/news/articleView.html?idxno=301139" target="_blank">코오롱제약 스포츠 뉴트리션 제품, 전국 군부대 PX 입점</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="issue-card">
+                    <h4>2. 한미약품, 에페글레나타이드 멕시코 진출 및 다파론 공급 계약 체결</h4>
+                    <div class="issue-meta">
+                        <span class="badge badge-importance">중요도: ⭐⭐⭐⭐</span>
+                        <span class="badge badge-dept">사업개발본부</span>
+                    </div>
+                    <div class="issue-content">
+                        <strong>📌 핵심:</strong>
+                        <p>한미약품이 멕시코 제약사와 에페글레나타이드 유통 계약을 체결하고 다파론 공급 계약을 체결하며 해외 시장 확대를 가속화하고 있다. 이는 한미약품의 글로벌 경쟁력을 강화하고, 매출 성장에 기여할 것으로 예상된다.</p>
+                    </div>
+                    <div class="issue-content">
+                        <strong>🎯 시사점:</strong>
+                        <p>비씨월드제약은 한미약품의 해외 진출 전략을 참고하여 자체 개발 제품 또는 위탁 생산 제품의 해외 수출 가능성을 모색해야 한다. 특히 사업개발본부는 중남미 시장을 중심으로 파트너십을 구축하고, 수출 품목을 다변화하는 방안을 고려해야 한다. 한미약품의 해외 진출 성공 사례를 벤치마킹하여 수출 전략을 구체화할 필요가 있다.</p>
+                    </div>
+
+                    <div class="related-articles">
+                        <strong style="color:#667eea;">📎 관련 기사 (3개)</strong>
+
+                        <div class="related-article-item">
+                            <a href="https://www.cstimes.com/news/articleView.html?idxno=690613" target="_blank">한미약품 '에페글레나타이드' 멕시코 진출…산페르社와 유통 계약</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                        <div class="related-article-item">
+                            <a href="https://n.news.naver.com/mnews/article/123/0002376653?sid=101" target="_blank">[공시pick] 한미약품, 멕시코에 658억 '다파론' 공급</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                        <div class="related-article-item">
+                            <a href="http://www.newstomato.com/ReadNews.aspx?no=1289354&inflow=N" target="_blank">한미약품, 국산 비만약 허가도 전에 해외 수출 성과</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="issue-card">
+                    <h4>3. 경쟁사, 사업개발 및 R&D 역량 강화 위한 인재 영입 활발</h4>
+                    <div class="issue-meta">
+                        <span class="badge badge-importance">중요도: ⭐⭐⭐⭐⭐</span>
+                        <span class="badge badge-dept">사업개발본부</span><span class="badge badge-dept">GRI본부</span><span class="badge badge-dept">전략기획본부</span>
+                    </div>
+                    <div class="issue-content">
+                        <strong>📌 핵심:</strong>
+                        <p>바이젠셀은 일동제약, 셀트리온 출신 임원을 영입하여 사업개발 및 GMP 핵심 인재를 보강하고 있으며, 지씨셀은 삼성서울병원 교수 영입을 통해 R&D 리더십을 강화하고 있다. 이는 경쟁사들이 신약 개발 및 사업 확장을 위한 투자를 확대하고 있음을 시사한다.</p>
+                    </div>
+                    <div class="issue-content">
+                        <strong>🎯 시사점:</strong>
+                        <p>비씨월드제약은 경쟁사들과의 경쟁에서 우위를 확보하기 위해 우수 인재 확보에 적극적으로 나서야 한다. 특히 사업개발본부와 GRI본부는 글로벌 시장 진출 및 신약 개발 경험이 풍부한 인재를 영입하고, 내부 인력의 전문성을 강화하는 교육 프로그램을 운영해야 한다. R&D 투자 효율성을 높이기 위해 외부 전문가와의 협력도 고려할 필요가 있다.</p>
+                    </div>
+
+                    <div class="related-articles">
+                        <strong style="color:#667eea;">📎 관련 기사 (3개)</strong>
+
+                        <div class="related-article-item">
+                            <a href="https://www.yakup.com/news/index.html?mode=view&cat=12&nid=322459" target="_blank">바이젠셀, 일동제약 출신 김선영 상무·셀트리온 출신 전수희 상무 영입</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                        <div class="related-article-item">
+                            <a href="https://n.news.naver.com/mnews/article/277/0005713038?sid=101" target="_blank">바이젠셀, 상업화 가속 위한 사업개발 및 GMP 핵심 인재 영입</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                        <div class="related-article-item">
+                            <a href="https://www.ceoscoredaily.com/page/view/2026012810222548345" target="_blank">지씨셀, R&amp;D 리더십 강화…T·NK 세포치료제 포트폴리오 고도화</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="issue-card">
+                    <h4>4. 디지털 헬스케어 시장 성장 및 관련 기술 개발 동향</h4>
+                    <div class="issue-meta">
+                        <span class="badge badge-importance">중요도: ⭐⭐⭐</span>
+                        <span class="badge badge-dept">GRI본부</span><span class="badge badge-dept">사업개발본부</span>
+                    </div>
+                    <div class="issue-content">
+                        <strong>📌 핵심:</strong>
+                        <p>디지털 헬스케어 시장이 성장하고 있으며, 모바일 앱을 활용한 치매 예방, 장내 미생물 분석, mRNA 치료제 개발 등 다양한 기술 개발이 이루어지고 있다. 디지털 헬스케어는 블록버스터 의약품 특허 만료, 신약 개발 비용 상승 속에서 필수 전략으로 부상하고 있다.</p>
+                    </div>
+                    <div class="issue-content">
+                        <strong>🎯 시사점:</strong>
+                        <p>비씨월드제약은 디지털 헬스케어 기술을 활용하여 기존 사업 모델을 혁신하고, 신규 사업 기회를 창출해야 한다. 특히 ODT 제형의 강점을 활용하여 환자 맞춤형 복약 관리 시스템을 구축하거나, 디지털 치료제 개발에 참여하는 방안을 고려할 수 있다. 디지털 헬스케어 관련 시장 동향 및 기술 개발 동향을 지속적으로 모니터링하고, 전문가와의 협력을 통해 사업 전략을 구체화해야 한다.</p>
+                    </div>
+
+                    <div class="related-articles">
+                        <strong style="color:#667eea;">📎 관련 기사 (4개)</strong>
+
+                        <div class="related-article-item">
+                            <a href="https://www.hinews.co.kr/view.php?ud=202601280906363965edd30pn2gj_48" target="_blank">군산시, 모바일 앱 ‘인지케어’ 도입해 비대면 치매 예방 강화</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                        <div class="related-article-item">
+                            <a href="https://www.koreahealthlog.com/news/articleView.html?idxno=55642" target="_blank">복잡한 장내 미생물 메타유전체 분석도구 '메타펀' 개발</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                        <div class="related-article-item">
+                            <a href="https://www.koreahealthlog.com/news/articleView.html?idxno=55640" target="_blank">mRNA 보호해 치료제 성능 높이는 기술 개발</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                        <div class="related-article-item">
+                            <a href="https://www.widedaily.com/news/articleView.html?idxno=287583" target="_blank">디지털 헬스케어, 국가별 비교해보니…&quot;한국은 초기단계&quot;</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="issue-card">
+                    <h4>5. 금값 폭등으로 인한 제약업계 장기근속 포상 변화</h4>
+                    <div class="issue-meta">
+                        <span class="badge badge-importance">중요도: ⭐⭐</span>
+                        <span class="badge badge-dept">전략기획본부</span>
+                    </div>
+                    <div class="issue-content">
+                        <strong>📌 핵심:</strong>
+                        <p>금값 상승과 환율 상승으로 인해 GC녹십자 등 제약업계에서 장기근속 포상으로 금 지급 방식을 현금 지급 방식으로 변경하고 있다. 이는 기업들의 비용 부담 증가를 의미한다.</p>
+                    </div>
+                    <div class="issue-content">
+                        <strong>🎯 시사점:</strong>
+                        <p>비씨월드제약은 장기근속 포상 제도를 재검토하여 금 지급 방식 외에 현금, 휴가, 교육 지원 등 다양한 방안을 고려해야 한다. 이는 비용 절감 효과뿐만 아니라 직원들의 만족도를 높이는 데에도 기여할 수 있다. 또한, 원자재 가격 변동에 따른 경영 리스크를 줄이기 위해 환율 변동에 대한 대비책을 마련해야 한다.</p>
+                    </div>
+
+                    <div class="related-articles">
+                        <strong style="color:#667eea;">📎 관련 기사 (2개)</strong>
+
+                        <div class="related-article-item">
+                            <a href="https://n.news.naver.com/mnews/article/014/0005469443?sid=103" target="_blank">&quot;미쳐버린 금값&quot; 제약업계 '황금메달' 사라진다</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                        <div class="related-article-item">
+                            <a href="https://www.ppss.kr/news/articleView.html?idxno=284337" target="_blank">'안전자산' 금의 역설…폭등한 금값에 포상·소비·투자 구조 변화</a>
+                            <div class="meta">네이버뉴스 | 2026-01-28</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="dept-summary">
+                    <h4>📊 부서별 주요 이슈</h4>
+
+                    <div class="dept-summary-item">
+                        <strong>영업마케팅본부:</strong> 경쟁사의 군부대 PX 채널 공략에 대응하여 새로운 유통 채널 확보를 위한 전략 수립이 필요하다. 특히 ODT 제형의 강점을 활용한 제품이나 건강기능식품, 화장품 등 신사업 분야 제품으로 접근하는 것을 검토해야 한다. 또한, 디지털 헬스케어 기술을 활용하여 환자 맞춤형 복약 관리 시스템을 구축하는 방안을 고려할 수 있다.
+                    </div>
+
+                    <div class="dept-summary-item">
+                        <strong>사업개발본부:</strong> 한미약품의 해외 진출 전략을 참고하여 자체 개발 제품 또는 위탁 생산 제품의 해외 수출 가능성을 모색해야 한다. 중남미 시장을 중심으로 파트너십을 구축하고, 수출 품목을 다변화하는 방안을 고려해야 한다. 또한, 디지털 헬스케어 관련 시장 동향 및 기술 개발 동향을 지속적으로 모니터링하고, 전문가와의 협력을 통해 사업 전략을 구체화해야 한다.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="insights-section" style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);" onclick="toggleSection(this)">
+                <span>📊 전체 기사 목록 (36건)</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="insights-content" id="articlesContainer">
+
+                <div class="category-major purple" onclick="toggleCategory(this)" data-category="경쟁사 소식">
+                    <span>경쟁사 소식 (22건)</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-major-content">
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>동아ST (2건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="동아제약 파티온, 군부대마트(PX) 유통 채널 확대" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.pharmnews.com/news/articleView.html?idxno=301141" target="_blank">동아제약 파티온, 군부대마트(PX) 유통 채널 확대</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                <span class="badge badge-similar">📎 유사 7개</span>
+                            </div>
+                            
+                            <div class="article-description">동아제약(대표이사 사장 백상환)의 더마 화장품 브랜드 파티온은 국군복지단 군부대마트(PX) 입찰에 선정돼... 동아제약은 군 장병들이 훈련소 생활과 야외 활동 등으로 외부 환경 변화가 잦은 상황에 놓일 수 있다고... </div>
+
+                            <div class="similar-articles">
+                                <div style="font-weight:600;margin-bottom:8px;">📎 유사 기사 (7개)</div>
+
+                                <div class="similar-article-item">
+                                    <a href="http://www.newswell.co.kr/news/articleView.html?idxno=15772" target="_blank">동아제약 파티온, MZ장병 위한 군부대마트 입점</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="http://www.datanews.co.kr/news/article.html?no=143056" target="_blank">동아제약 파티온, 국군 장병 대상 군부대마트(PX) 입점</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="http://www.seoulwire.com/news/articleView.html?idxno=703808" target="_blank">동아제약 파티온, 스킨케어 제품 2종 군부대마트 입점</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://www.asiaa.co.kr/news/articleView.html?idxno=238547" target="_blank">동아제약 '파티온', 군부대마트 입점...트러블 케어 더마 브랜드 입지 강...</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://weekly.cnbnews.com/news/article.html?no=204194" target="_blank">동아제약, 더마코스메틱 브랜드 ‘파티온’ PX 입점</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div style="text-align: center; color: #6b7280; font-size: 13px; padding: 8px;">
+                                    외 2개
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="동아ST, 스텔라라 바이오시밀러 ‘이뮬도사’ 캐나다 품목허가 획득" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.smarttoday.co.kr/ko-kr/articles/102295" target="_blank">동아ST, 스텔라라 바이오시밀러 ‘이뮬도사’ 캐나다 품목허가 획득</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">2021년 7월에는 다국적 제약사 인타스와 이뮬도사의 글로벌 라이선스 아웃 계약을 체결했다. 인타스는 미국의 어코드 바이오파마와 유럽, 영국 및 캐나다의 어코드 헬스케어를 포함한 전 세계 계열사를 통해... </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>한미약품 (3건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="한미약품 '에페글레나타이드' 멕시코 진출…산페르社와 유통 계약" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.cstimes.com/news/articleView.html?idxno=690613" target="_blank">한미약품 '에페글레나타이드' 멕시코 진출…산페르社와 유통 계약</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                <span class="badge badge-similar">📎 유사 14개</span>
+                            </div>
+                            
+                            <div class="article-description">산페르 본사 전경 컨슈머타임스=김예령 기자 | 한미약품은 멕시코 제약사 산페르(Laboratorios Sanfer)와... 1941년 설립된 산페르는 멕시코 민간 제약기업으로 중남미 전역에 걸친 견고한 영업·유통 네트워크와 자체... </div>
+
+                            <div class="similar-articles">
+                                <div style="font-weight:600;margin-bottom:8px;">📎 유사 기사 (14개)</div>
+
+                                <div class="similar-article-item">
+                                    <a href="http://theviewers.co.kr/View.aspx?No=3956353" target="_blank">한미약품, 멕시코 산페르社와 GLP-1 비만신약 등 수출 계약</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://www.asiaa.co.kr/news/articleView.html?idxno=238554" target="_blank">한미약품, 멕시코 산페르와 GLP-1 비만신약 등 수출 계약</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://n.news.naver.com/mnews/article/117/0004030294?sid=102" target="_blank">한미약품, 멕시코 제약사 산페르와 비만신약 등 수출 계약</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://dealsite.co.kr/articles/155855" target="_blank">한미약품, 멕시코 산페르와 비만 신약 수출 계약</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="http://www.weeklytoday.com/news/articleView.html?idxno=754915" target="_blank">[위클리오늘] 한미약품, 멕시코 산페르社와 GLP-1 비만신약 등 수출 계약</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div style="text-align: center; color: #6b7280; font-size: 13px; padding: 8px;">
+                                    외 9개
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="[공시pick] 한미약품, 멕시코에 658억 '다파론' 공급" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://n.news.naver.com/mnews/article/123/0002376653?sid=101" target="_blank">[공시pick] 한미약품, 멕시코에 658억 '다파론' 공급</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">한미약품이 멕시코 제약사 산퍼(Laboratorios Sanfer)와 다파론정과 다파론듀오서방정 수출 공급계약을 체결했다고 27일 공시했다. 계약금액은 658억원으로, 2024년 연결 기준 매출액 대비 4.4%에 해당한다. 계약 기간은 현지... </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="한미약품, 국산 비만약 허가도 전에 해외 수출 성과" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="http://www.newstomato.com/ReadNews.aspx?no=1289354&inflow=N" target="_blank">한미약품, 국산 비만약 허가도 전에 해외 수출 성과</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">뉴스토마토 = 동지훈 기자 | 한미약품 본사. (사진=한미약품)  한미약품(128940)이 독자 개발한 한국 최초의 글루카곤 유사 펩타이드-1(GLP-1) 계열 비만·대사질환 치료제 '에페글레나타이드'를 중심으로 글로벌 시장... </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>바이젠셀 (2건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="바이젠셀, 일동제약 출신 김선영 상무·셀트리온 출신 전수희 상무 영입" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.yakup.com/news/index.html?mode=view&cat=12&nid=322459" target="_blank">바이젠셀, 일동제약 출신 김선영 상무·셀트리온 출신 전수희 상무 영입</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                <span class="badge badge-similar">📎 유사 1개</span>
+                            </div>
+                            
+                            <div class="article-description">이어 스탠포드 의과대학 SPARK 중개연구 프로그램 매니저와 일동제약 글로벌 사업본부 상무를 거쳐, 일동USA 지사 설립 및 운영을 주도했다. 글로벌 파이프라인을 대상으로 라이선스 아웃(L/O)과 파트너십 검토·추진... </div>
+
+                            <div class="similar-articles">
+                                <div style="font-weight:600;margin-bottom:8px;">📎 유사 기사 (1개)</div>
+
+                                <div class="similar-article-item">
+                                    <a href="http://www.biospectator.com/view/news_view.php?varAtcId=27650" target="_blank">바이젠셀, 김선영·전수희 상무 영입</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="바이젠셀, 상업화 가속 위한 사업개발 및 GMP 핵심 인재 영입" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://n.news.naver.com/mnews/article/277/0005713038?sid=101" target="_blank">바이젠셀, 상업화 가속 위한 사업개발 및 GMP 핵심 인재 영입</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                <span class="badge badge-similar">📎 유사 1개</span>
+                            </div>
+                            
+                            <div class="article-description">이어 스탠포드 의과대학 SPARK 중개연구 프로그램 매니저와 일동제약 글로벌 사업본부 상무를 거쳐, 일동USA 지사 설립 및 운영을 주도했다. 글로벌 파이프라인을 대상으로 라이선스 아웃(L/O)과 파트너십 검토·추진... </div>
+
+                            <div class="similar-articles">
+                                <div style="font-weight:600;margin-bottom:8px;">📎 유사 기사 (1개)</div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://n.news.naver.com/mnews/article/008/0005310491?sid=101" target="_blank">바이젠셀, 사업개발·GMP 핵심 인재 영입…&quot;세포치료제 상업화 가속&quot;</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>코오롱제약 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="코오롱제약 스포츠 뉴트리션 제품, 전국 군부대 PX 입점" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.pharmnews.com/news/articleView.html?idxno=301139" target="_blank">코오롱제약 스포츠 뉴트리션 제품, 전국 군부대 PX 입점</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                <span class="badge badge-similar">📎 유사 1개</span>
+                            </div>
+                            
+                            <div class="article-description">코오롱제약은 스포츠 뉴트리션 제품 '리얼아미노워터 레드비트 플러스'가 2026년 1월부터 전국 군부대 PX에... 코오롱제약은 제품에 필수아미노산과 BCAA, L-글루타민, L-아르기닌 등 아미노산 성분이 함유됐다고 설명했다.... </div>
+
+                            <div class="similar-articles">
+                                <div style="font-weight:600;margin-bottom:8px;">📎 유사 기사 (1개)</div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://mdtoday.co.kr/news/view/1065572655797356" target="_blank">코오롱제약, 군 PX 입점 '리얼아미노워터' 판매 개시</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>HLB라이프케어 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="HLB '간암·담관암 신약' FDA 허가 도전" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://news.mtn.co.kr/news-detail/2026012809501694134" target="_blank">HLB '간암·담관암 신약' FDA 허가 도전</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                <span class="badge badge-similar">📎 유사 3개</span>
+                            </div>
+                            
+                            <div class="article-description">앞서 엘레바와 항서제약은 지난 23일(현지시간) FDA에 간암 신약 허가 재신청을 완료했다. 엘레바는... 항서제약은 항 PD-1 항체인 ‘캄렐리주맙’에 대한 생물의약품허가신청(BLA)을 각각 제출했다. 두 약물은... </div>
+
+                            <div class="similar-articles">
+                                <div style="font-weight:600;margin-bottom:8px;">📎 유사 기사 (3개)</div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://www.job-post.co.kr/news/articleView.html?idxno=204290" target="_blank">HLB, 간암 신약 美 FDA 허가 재신청 완료</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="http://www.metroseoul.co.kr/article/20260128500189" target="_blank">HLB, 담관암 신약 '리라푸그라티닙' 미 FDA 첫 도전...&quot;허가여부 9월 전망...</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://n.news.naver.com/mnews/article/031/0001000702?sid=101" target="_blank">HLB, 담관암 신약 후보 '리라푸그라티닙' 美 FDA 허가 신청</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>대원제약 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="대원제약, 지난해 실적 '고전'…&quot;올해 전망은 밝아&quot;" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.medipana.com/news/articleView.html?idxno=405989" target="_blank">대원제약, 지난해 실적 '고전'…&quot;올해 전망은 밝아&quot;</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">지난해 대원제약이 외형 성장 측면에서 주춤했다는 전망이 나왔다. 같은 기간 수익성은 매출원가 및 판관비... 28일 증권업계에 따르면, 대원제약 지난해 예상 매출액은 연결 재무제표 기준으로 5955억원이다. 전년 5982억원... </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>한림제약 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="한림제약, 고혈압 3제 복합제 ‘로디엔셋정’ 출시" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://n.news.naver.com/mnews/article/296/0000097066?sid=101" target="_blank">한림제약, 고혈압 3제 복합제 ‘로디엔셋정’ 출시</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">한림제약은 자사의 개량신약인 칼슘길항제(CCB) 기반 고혈압 치료제 '로디엔' 브랜드의 신제품으로 3제 복합제... 한림제약은 알암로디핀을 제거해 기존 대비 절반 용량으로도 동등한 혈압 강하 효과를 내도록 한 것이다.... </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>동국제약 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="동국제약 &quot;고순도 연어 PDRN 농축함유 앰플제품 출시&quot;" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://n.news.naver.com/mnews/article/003/0013734536?sid=102" target="_blank">동국제약 &quot;고순도 연어 PDRN 농축함유 앰플제품 출시&quot;</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                <span class="badge badge-similar">📎 유사 3개</span>
+                            </div>
+                            
+                            <div class="article-description">동국제약이 고순도 PDRN을 농축 함유한 '테카플러스포뮬러 PDRN 농축 앰플'을 출시했다고 28일 밝혔다. 이번... 동국제약 마케팅 담당자는 &quot;크림 제형이 주를 이루는 기존 약국 유통 PDRN 화장품과 달리, 끈적임 없이... </div>
+
+                            <div class="similar-articles">
+                                <div style="font-weight:600;margin-bottom:8px;">📎 유사 기사 (3개)</div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://daily.hankooki.com/news/articleView.html?idxno=1328267" target="_blank">동국제약, '테카플러스포뮬러 PDRN 농축 앰플' 출시</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://www.pressman.kr/news/articleView.html?idxno=99100" target="_blank">동국제약, 연어 PDRN 담은 '테카플러스포뮬러 PDRN 농축 앰플' 출시</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="http://www.press9.kr/news/articleView.html?idxno=71580" target="_blank">동국제약, 고순도 연어 PDRN 담은 '테카플러스포뮬러 PDRN 농축 앰플' 출...</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>광동제약 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="종근당, 타그리소 첫 복제약 '오티닙정' 허가…&quot;한시적 독점 요건 충족..." data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://n.news.naver.com/mnews/article/008/0005310502?sid=101" target="_blank">종근당, 타그리소 첫 복제약 '오티닙정' 허가…&quot;한시적 독점 요건 충족...</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">(복제약)인 '오티닙정'에 대한 허가를 획득했다고 28일 밝혔다. 오티닙정은 오리지널(원조약)인 타그리소와... 종근당은 광동제약과 지난해 9월 아스트라제네카를 상대로 타그리소 제제 특허에 대한 소극적... </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>노바티스 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="&quot;빈틈은 지금뿐&quot;… 노바티스 '졸레어' 고용량, 서울대병원 '기습 상륙'" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="http://www.medisobizanews.com/news/articleView.html?idxno=133930" target="_blank">&quot;빈틈은 지금뿐&quot;… 노바티스 '졸레어' 고용량, 서울대병원 '기습 상륙'</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">셀트리온제약 관계자는 &quot;300mg 제형은 허가 이후 약가 산정 등 일반적인 절차를 진행 중인 단계로 별도의 이슈는 없다&quot;며 &quot;올해 상반기 내 300mg 용량과 함께 환자 자가 주사 편의성을 높인 오토인젝터(AI) 제형을 동시에... </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>일동제약 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="일동제약-경기도약사회, '하루한포 장건강 생유산균' 출시" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.job-post.co.kr/news/articleView.html?idxno=204292" target="_blank">일동제약-경기도약사회, '하루한포 장건강 생유산균' 출시</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">일동제약은 경기도약사회와 공동 개발한 건강기능식품 '하루한포 장건강 생유산균'을 지난 26일 출시했다고... 일동제약이 자체 개발한 프로바이오틱스 원료에 특허받은 4중 코팅 기술을 적용해 유익균이 장까지 잘... </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>유유제약 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="유유테이진, 2026년 전락발표회의 개최" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.rapportian.com/news/articleView.html?idxno=231869" target="_blank">유유테이진, 2026년 전락발표회의 개최</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                <span class="badge badge-similar">📎 유사 1개</span>
+                            </div>
+                            
+                            <div class="article-description">유유테이진메디케어는 가정용 산소발생기, 수면양압기, 인공호흡기 렌탈서비스를 제공하는 홈헬스케어 렌탈사업 선두주자로, 지난 2006년 유유제약과 일본 테이진그룹의 합작법인으로 설립됐다.</div>
+
+                            <div class="similar-articles">
+                                <div style="font-weight:600;margin-bottom:8px;">📎 유사 기사 (1개)</div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://www.pharmnews.com/news/articleView.html?idxno=301138" target="_blank">유유테이진메디케어, 전국 영업·마케팅 임직원 대상 전략발표회 진행</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>지씨셀 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="지씨셀, R&amp;D 리더십 강화…T·NK 세포치료제 포트폴리오 고도화" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.ceoscoredaily.com/page/view/2026012810222548345" target="_blank">지씨셀, R&amp;D 리더십 강화…T·NK 세포치료제 포트폴리오 고도화</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">발표는 현장에서 높은 관심을 받았으며, 발표자로 나선 삼성서울병원 김원석 교수는 발표 후 “한국 바이오 업계에서 플랫폼 기술이 드문 가운데, 지씨셀은 10년 넘게 탄탄하게 축적한 CAR-NK세포치료제 개발 역량으로... </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>티앤알바이오팹 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="티앤알바이오팹, '세포 블록 조립' 방식 인공장기 제작 기술 발표" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.rapportian.com/news/articleView.html?idxno=231859" target="_blank">티앤알바이오팹, '세포 블록 조립' 방식 인공장기 제작 기술 발표</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">바이오팹은 최근 한국공학대학교 연구진과 함께 혈관을 포함한 세포 블록(Organ Building Block·OBB)을 3D로 제작하고 이를 조립해 인공장기를 구현하는 플랫폼 기술을 생체 재료 분야 국제학술지 '머터리얼즈 투데이 바이오... </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>한국콜마 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="한국콜마, 선케어 기술 유출 소송 '완승'…8년 분쟁 끝 인터코스 소송비..." data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.e-science.co.kr/news/articleView.html?idxno=123763" target="_blank">한국콜마, 선케어 기술 유출 소송 '완승'…8년 분쟁 끝 인터코스 소송비...</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">법적·제도적 대응을 지속해 나갈 것&quot;이라고 밝혔다. 업계에서는 이번 사건을 계기로 화장품·바이오 등 기술 집약 산업 전반에서 영업비밀 보호 제도와 처벌 체계에 대한 재정비 논의가 다시 속도를 낼지 주목하고 있다.</div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>삼성바이오로직스 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="삼성바이오에피스 VS 셀트리온… 바이오시밀러 왕자는 누구" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://m.skyedaily.com/news_view.html?ID=296776" target="_blank">삼성바이오에피스 VS 셀트리온… 바이오시밀러 왕자는 누구</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">스카이데일리 허승아기자 = 시밀러 전쟁 글로벌 시장… 제형 변형 가격 경쟁 우위 ▲ 제미나이 생성 국내 바이오시밀러(의약품 복제약) 기업을 논할때 삼성바이오에피스와 셀트리온을 빼놓을수 없다. 국내서 두 기업은... </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>보령제약 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="보령컨슈머헬스케어, 정웅제 새 대표이사 선임" data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.econovill.com/news/articleView.html?idxno=727342" target="_blank">보령컨슈머헬스케어, 정웅제 새 대표이사 선임</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                <span class="badge badge-similar">📎 유사 7개</span>
+                            </div>
+                            
+                            <div class="article-description">정웅제(1967년생) 대표는 의약품 영업 전문가로, 한미약품 상무를 거쳐 2017년 보령에 합류해 의원영업본부장, 영업부문장직을 수행하며 전략 수립부터 현장 실행까지 영업·마케팅 전반을 이끌어 왔다. 빠른 시장 대응과... </div>
+
+                            <div class="similar-articles">
+                                <div style="font-weight:600;margin-bottom:8px;">📎 유사 기사 (7개)</div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://weekly.cnbnews.com/news/article.html?no=204197" target="_blank">보령컨슈머헬스케어, 정웅제 대표이사 선임</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://www.socialvalue.kr/news/view/1065576788779774" target="_blank">보령컨슈머헬스케어, 정웅제 신임 대표이사 선임</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="http://www.metroseoul.co.kr/article/20260128500191" target="_blank">보령컨슈머헬스케어, 정웅제 신임 대표 선임...&quot;영업 경쟁력 강화&quot;</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://www.news2day.co.kr/article/20260128500115" target="_blank">[대표 인사] 보령컨슈머헬스케어, 정웅제 신임 대표 선임</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://n.news.naver.com/mnews/article/346/0000103893?sid=103" target="_blank">보령컨슈머헬스케어, ‘영업통’ 정웅제 대표이사 선임</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div style="text-align: center; color: #6b7280; font-size: 13px; padding: 8px;">
+                                    외 2개
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>셀트리온 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="셀트리온 짐펜트라, 美서 역대 최대 처방량…마케팅·환급 전략 효과 가..." data-category="경쟁사 소식">
+                            <div class="article-title">
+                                <a href="https://www.m-economynews.com/news/article.html?no=64141" target="_blank">셀트리온 짐펜트라, 美서 역대 최대 처방량…마케팅·환급 전략 효과 가...</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                <span class="badge badge-similar">📎 유사 5개</span>
+                            </div>
+                            
+                            <div class="article-description">짐펜트라는 최근 시그나 그룹 산하 에버노스 헬스 서비스의 처방집에 선호의약품으로 등재됐다. 이에 따라 시그나 계열 보험 가입자는 복잡한 행정 절차 없이 짐펜트라 처방이 가능해졌고, 환자 접근성과 의료진 처방... </div>
+
+                            <div class="similar-articles">
+                                <div style="font-weight:600;margin-bottom:8px;">📎 유사 기사 (5개)</div>
+
+                                <div class="similar-article-item">
+                                    <a href="http://www.dailysmart.co.kr/news/articleView.html?idxno=119283" target="_blank">셀트리온 '짐펜트라', 미국서 역대 최대 처방량 기록</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="http://www.seoulwire.com/news/articleView.html?idxno=703803" target="_blank">셀트리온 &quot;1월 짐펜트라 역대 최대 처방량 기록&quot;</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://n.news.naver.com/mnews/article/031/0001000703?sid=101" target="_blank">셀트리온 &quot;짐펜트라, 美 처방 역대 최대 기록&quot;</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://m.skyedaily.com/news_view.html?ID=296816" target="_blank">셀트리온 짐펜트라 역대 최대 처방 기록… 전년比 352% ↑</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                                <div class="similar-article-item">
+                                    <a href="https://dealsite.co.kr/articles/155851" target="_blank">[제약+] 셀트리온 &quot;짐펜트라, 美 주간 처방량 역대 최대 기록&quot; 外</a>
+                                    <div class="meta">네이버뉴스 | 2026-01-28</div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="category-major green" onclick="toggleCategory(this)" data-category="기타 소식">
+                    <span>기타 소식 (14건)</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-major-content">
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>기타 (8건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="오츠카 ADHD 치료제 FDA 승인신청 접수" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://www.medipana.com/news/articleView.html?idxno=405988" target="_blank">오츠카 ADHD 치료제 FDA 승인신청 접수</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">일본 오츠카홀딩스 산하 오츠카제약은 27일 주의력결핍 과잉행동장애(ADHD) 치료제 '센타나파딘'(centanafadine)의 승인신청이 FDA에 접수됐다고 발표했다. 센타나파딘은 우선심사품목으로 지정됐으며 심사종료... </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="군산시, 모바일 앱 ‘인지케어’ 도입해 비대면 치매 예방 강화" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://www.hinews.co.kr/view.php?ud=202601280906363965edd30pn2gj_48" target="_blank">군산시, 모바일 앱 ‘인지케어’ 도입해 비대면 치매 예방 강화</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">이번 사업은 디지털 기기 사용에 익숙해진 시대적 변화를 반영하여, 시민들이 시공간의 제약 없이 스스로 인지 건강을 관리할 수 있는 환경을 조성하기 위해 추진되었다. ‘인지케어’ 앱은 시민들의 두뇌 건강 증진을... </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="&quot;미쳐버린 금값&quot; 제약업계 '황금메달' 사라진다" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://n.news.naver.com/mnews/article/014/0005469443?sid=103" target="_blank">&quot;미쳐버린 금값&quot; 제약업계 '황금메달' 사라진다</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">여겨졌던 제약바이오 업계의 ‘장기근속 금 포상’ 문화가 빠르게 사라지고 있다. 금값 상승에 원·달러 환율 상승까지 겹치면서 기업들의 비용 부담이 감당하기 어려운 수준까지 치솟았기 때문이다. 28일 제약바이오... </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="케어젠, 임카스 파리 2026서 독보적 펩타이드 기술 선보인다" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://www.job-post.co.kr/news/articleView.html?idxno=204295" target="_blank">케어젠, 임카스 파리 2026서 독보적 펩타이드 기술 선보인다</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">펩타이드 전문 바이오 기업 케어젠(대표 정용지)이 오는 29일부터 31일까지 프랑스 파리 팔레 데 콩그레에서 열리는 세계 최대 미용성형학회 'IMCAS World Congress 2026(임카스 파리 2026)'에 에메랄드 스폰서로... </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="울트라브이 '트라이덤', 사우디 의료기기 허가" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://www.pressman.kr/news/articleView.html?idxno=99098" target="_blank">울트라브이 '트라이덤', 사우디 의료기기 허가</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">바이오 메디컬 뷰티그룹 울트라브이(UltraV, 대표 권한진)가 의료미용기기 '트라이덤(Triderm)'에 대해 사우디아라비아 보건당국으로부터 정식 의료기기 허가를 획득했다고 28일 밝혔다. 허가 시점은 2026년 1월이다. 이번... </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="'안전자산' 금의 역설…폭등한 금값에 포상·소비·투자 구조 변화" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://www.ppss.kr/news/articleView.html?idxno=284337" target="_blank">'안전자산' 금의 역설…폭등한 금값에 포상·소비·투자 구조 변화</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">28일 제약·바이오업계에 따르면 GC녹십자는 올해부터 장기근속 포상을 기존의 금 지급 방식에서 현금 축하금 지급 방식으로 변경했다. 종전에는 근속 10년·20년·30년·40년에 각각 금 10돈, 20돈, 30돈, 40돈을 지급했지만... </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="횡성군, 지역 약국과 손잡고 ‘항생제 내성 예방수칙’ 집중 홍보" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://www.hinews.co.kr/view.php?ud=202601280805484035edd30pn2gj_48" target="_blank">횡성군, 지역 약국과 손잡고 ‘항생제 내성 예방수칙’ 집중 홍보</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">횡성군보건소가 항생제 내성 문제의 심각성을 알리고 주민들의 올바른 의약품 복용 습관을 형성하기 위해 관내 약국과 연계한 ‘항생제 내성 예방 홍보사업’을 본격 추진한다고 밝혔다. 이번 사업은 실생활에서... </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="FDA, 비만치료제 ‘마운자로 퀵펜’ 환자간 공유 금지 경고" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://m.skyedaily.com/news_view.html?ID=296823" target="_blank">FDA, 비만치료제 ‘마운자로 퀵펜’ 환자간 공유 금지 경고</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">FDA가 20일(현지시간) 업테이드한  최신 의약품 첨부문서(라벨)에 따르면, 주사바늘을 교체하더라도 퀵펜을 다른 사람과 함께 사용하는 행위는 혈액매개 병원체 전파 위험을 초래할 수 있다고 명시했다. 변경된 ‘경고 및... </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>산업동향 (3건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="나노엔텍, 하이브리드 세포 계수기 'ADAM-rXBC' 글로벌 출시" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://www.newspim.com/news/view/20260128000326" target="_blank">나노엔텍, 하이브리드 세포 계수기 'ADAM-rXBC' 글로벌 출시</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">또한 나노엔텍은 ADAM-rXBC가 글로벌 제약·바이오 업체의 세포·항체치료제 제조 공정에서 필수 품질관리... 글로벌 제약·바이오 생산 공정 인프라 시장을 적극 공략할 것&quot;이라고 밝혔다. 한편 나노엔텍은 이번... </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="'캐나다 60조 프로젝트' HD현대도 가세" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="http://www.smedaily.co.kr/news/articleView.html?idxno=349961" target="_blank">'캐나다 60조 프로젝트' HD현대도 가세</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">또 캐나다 유수 대학, 연구기관과 함께 조선 및 제조업 분야뿐 아니라 인공지능(AI), 바이오 등 첨단 연구·개발 분야까지 아우르는 연구개발(R&amp;D) 공동협력을 추진할 계획이다. 에너지 분야에서는 HD현대오일뱅크를... </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="디지털 헬스케어, 국가별 비교해보니…&quot;한국은 초기단계&quot;" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://www.widedaily.com/news/articleView.html?idxno=287583" target="_blank">디지털 헬스케어, 국가별 비교해보니…&quot;한국은 초기단계&quot;</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">28일 의약품 시장조사기관 아이큐비아의 디지털 헬스케어 관련 보고서에 따르면 블록버스터 의약품의 특허 만료, 신약 개발 비용 상승 속에서 디지털 헬스는 필수 전략으로 부상하고 있다. 세계적으로 33만7000개... </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>연구동향 (2건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="복잡한 장내 미생물 메타유전체 분석도구 '메타펀' 개발" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://www.koreahealthlog.com/news/articleView.html?idxno=55642" target="_blank">복잡한 장내 미생물 메타유전체 분석도구 '메타펀' 개발</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">인체 마이크로바이옴은 우리 몸속에 사는 수많은 미생물의 집합으로 최근 장내 미생물이 비만, 당뇨 등... 마이크로바이옴 연구의 핵심 기술로 자리 잡았다. 하지만 분석 과정이 매우 복잡하고 사용하는 프로그램이나... </div>
+
+                        </div>
+
+                        <div class="article-group-card article-item" data-title="mRNA 보호해 치료제 성능 높이는 기술 개발" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://www.koreahealthlog.com/news/articleView.html?idxno=55640" target="_blank">mRNA 보호해 치료제 성능 높이는 기술 개발</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">공정 기술을 제시했다&quot;라며 &quot;향후 대량 생산 공정과 연계해 차세대 mRNA 치료제의 산업적 활용 가능성을 높이겠다&quot;라고 밝혔다. 이번 연구결과는 바이오·센서 분야 국제 학술지 'Biosensors and Bioelectronics'에 게재됐다.</div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="category-minor" onclick="toggleCategory(this)">
+                        <span>정책/제도 (1건)</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="category-minor-content">
+
+                        <div class="article-group-card article-item" data-title="연령 기준 묶인 '소아비만 약물치료'…현장 괴리" data-category="기타 소식">
+                            <div class="article-title">
+                                <a href="https://www.dailymedi.com/news/news_view.php?wr_id=933382" target="_blank">연령 기준 묶인 '소아비만 약물치료'…현장 괴리</a>
+                            </div>
+                            <div class="article-meta">
+                                <span class="badge badge-source">📰 네이버뉴스</span>
+                                <span class="badge badge-source">📅 2026-01-28</span>
+                                
+                            </div>
+                            
+                            <div class="article-description">식품의약품안전처는 식욕억제제 등 의료용 마약류의 오남용을 막기 위해 마약류통합관리시스템을 활용한 사후관리 중심의 규제 체계를 운영하고 있다. 일정 기간 수집된 처방 데이터를 토대로 오남용 조치 기준을 벗어난... </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2025 제약 뉴스 수집 시스템 v11.3 최종판 | GitHub Pages 자동 배포
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(element) {
+            element.classList.toggle('collapsed');
+            const content = element.nextElementSibling;
+            if (content) {
+                content.classList.toggle('hidden');
+            }
+        }
+
+        function toggleCategory(element) {
+            event.stopPropagation();
+            element.classList.toggle('collapsed');
+            const content = element.nextElementSibling;
+            if (content) {
+                content.classList.toggle('hidden');
+            }
+        }
+
+        function filterArticles() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const articles = document.querySelectorAll('.article-item');
+            let visibleCount = 0;
+
+            articles.forEach(article => {
+                const title = (article.dataset.title || '').toLowerCase();
+                const category = article.dataset.category || '';
+
+                const matchesSearch = !searchTerm || title.includes(searchTerm);
+                const matchesCategory = !categoryFilter || category.includes(categoryFilter);
+
+                if (matchesSearch && matchesCategory) {
+                    article.style.display = '';
+                    visibleCount++;
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+
+            const resultEl = document.getElementById('filterResult');
+            if (searchTerm || categoryFilter) {
+                resultEl.textContent = '📊 검색 결과: ' + visibleCount + '건';
+                resultEl.style.display = 'block';
+            } else {
+                resultEl.style.display = 'none';
+            }
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('categoryFilter').value = '';
+            filterArticles();
+        }
+    </script>
+</body>
+</html>
